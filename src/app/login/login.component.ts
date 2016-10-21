@@ -1,13 +1,16 @@
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
-
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import "rxjs/add/operator/do";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/take";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
-import { FirebaseAuth, FirebaseAuthState } from 'angularfire2';
-
+import {
+  AngularFire,
+  AuthProviders,
+  AuthMethods,
+  FirebaseAuth,
+  FirebaseAuthState
+} from "angularfire2";
 import { FormComponent } from "../shared/forms";
 import { validateEmail } from "../shared/forms/validators";
 
@@ -37,7 +40,7 @@ export class LoginComponent extends FormComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, validateEmail]],
-      password: ['', [Validators.required, validateEmail]],
+      password: ['', [Validators.required]],
     });
     this.form.valueChanges.subscribe(data => this.onValueChanged(data));
   }

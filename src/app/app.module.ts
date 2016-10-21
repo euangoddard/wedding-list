@@ -12,6 +12,7 @@ import { AuthGuard } from "./auth.guard.service";
 import { FieldErrorsComponent } from "./shared/forms";
 import { IdentifyComponent } from './identify/identify.component';
 import { IdentityModule } from './shared/identity/identity.module';
+import { ClaimPipe } from './list/claim.pipe';
 
 
 export const firebaseConfig = {
@@ -30,6 +31,7 @@ export const firebaseConfig = {
     AdminListComponent,
     FieldErrorsComponent,
     IdentifyComponent,
+    ClaimPipe,
   ],
   imports: [
     BrowserModule,

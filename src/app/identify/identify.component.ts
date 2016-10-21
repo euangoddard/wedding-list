@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
-
 import { FormComponent } from "../shared/forms";
 import { IdentityService } from "../shared/identity/identity.service";
+import { validateEmail } from "../shared/forms/validators";
 
 @Component({
   selector: 'app-identify',
@@ -17,7 +16,7 @@ export class IdentifyComponent extends FormComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private identity: IdentityService,
-  ) { 
+  ) {
       super();
     }
 
@@ -27,7 +26,7 @@ export class IdentifyComponent extends FormComponent implements OnInit {
     }
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, validateEmail]],
     });
     this.form.valueChanges.subscribe(data => this.onValueChanged(data));
   }

@@ -1,11 +1,21 @@
 <h2>The wedding list</h2>
 
-<ul>
-  <li *ngFor="let section of gifts | async">
-    
-    {{ section.name }}
-    <ol>
-      <li *ngFor="let gift of section.gifts">{{ gift.name }}</li>
-    </ol>
-  </li>
-</ul>
+<p>When you claim a gift, it will be recorded as coming from <em>{{ claimer.name }} ({{ claimer.email }})</em></p>
+
+<section *ngFor="let section of gifts | async">
+  <h3>{{ section.name }}</h3>
+  <ol>
+    <li *ngFor="let gift of section.gifts">
+      {{ gift.name }}
+      <button
+        *ngIf="!gift.claimer"
+        type="button"
+        (click)="claimGift(gift)"
+      >I will get this</button>
+      <em *ngIf="gift.claimer">
+        This gift has been claimed
+        <span *ngIf="gift | isClaimedByCurrentUser">by you</span>
+      </em>
+    </li>
+  </ol>
+</section>
