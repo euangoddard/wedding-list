@@ -1,3 +1,9 @@
-<p>
-  admin-list works!
-</p>
+<h2>Manage your wedding list</h2>
+
+<article *ngFor="let gift of gifts | async">
+  {{ gift.name }}
+  {{ gift.section }}
+  <span *ngIf="gift.claimer">Claimed by {{ gift.claimer.name }}</span>
+  <button type="button">Edit</button>
+  <button type="button">Delete</button>
+</article>

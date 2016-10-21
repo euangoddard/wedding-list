@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFire, FirebaseListObservable } from "angularfire2";
+import { Gift } from "../shared/models";
 
 @Component({
   selector: 'app-admin-list',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminListComponent implements OnInit {
 
-  constructor() { }
+  gifts: FirebaseListObservable<Gift[]>;
+
+  constructor(
+    private firebase: AngularFire,
+  ) { }
 
   ngOnInit() {
+    this.gifts = this.firebase.database.list('/gifts');
   }
 
 }

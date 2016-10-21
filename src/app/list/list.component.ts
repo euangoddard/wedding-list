@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { AngularFire } from "angularfire2";
+import { AngularFire, FirebaseListObservable } from "angularfire2";
 import { IdentityService } from "../shared/identity/identity.service";
+import { GiftClaimer, Gift, GiftSection } from "../shared/models";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-list',
@@ -9,9 +11,11 @@ import { IdentityService } from "../shared/identity/identity.service";
 })
 export class ListComponent implements OnInit {
 
-  gifts: any;
+  giftSections: Observable<GiftSection[]>;
 
-  claimer: Claimer
+  claimer: GiftClaimer;
+
+  private gifts: FirebaseListObservable<Gift[]>;
 
   constructor(
     private firebase: AngularFire,
@@ -20,11 +24,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.claimer = this.identity.identity;
-    //this.firebase.database.list('/gifts').push({name: 'Towels', section: 'Bathroom', claimedBy: null});
-    this.gifts = this.firebase.database.list('/gifts').map(gifts => {
+    //this.firebase.database.list('/giftSections').push({name: 'Towels', section: 'Bathroom', claimedBy: null});
+    this.gifts = this.firebase.database.list('/gifts');
+    this.giftSections = this.gifts.map((gifts: Gift[]) => {
       const sectionsWithGifts = [];
       const giftsGroupedBySection = groupBy(gifts, 'section');
-      let sectionGifts: Array<any>;
+      let sectionGifts: GiftSection[];
       for (let sectionName in giftsGroupedBySection) {
         sectionGifts = giftsGroupedBySection[sectionName];
         sectionsWithGifts.push({
@@ -43,15 +48,9 @@ export class ListComponent implements OnInit {
 }
 
 
-function groupBy (collection: Array<any>, key: string) {
+function groupBy (collection: Array<any>, key: string): {[key: string]: Array<any>} {
   return collection.reduce(function(rv, x) {
     (rv[x[key]] = rv[x[key]] || []).push(x);
     return rv;
   }, {});
-};
-
-
-interface Claimer {
-  name: string;
-  email: string;
 }

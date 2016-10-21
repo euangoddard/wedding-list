@@ -2,7 +2,7 @@
 
 <p>When you claim a gift, it will be recorded as coming from <em>{{ claimer.name }} ({{ claimer.email }})</em></p>
 
-<section *ngFor="let section of gifts | async">
+<section *ngFor="let section of giftSections | async">
   <h3>{{ section.name }}</h3>
   <ol>
     <li *ngFor="let gift of section.gifts">
