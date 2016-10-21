@@ -1,0 +1,16 @@
+<h2>Please sign-in to view the wedding list</h2>
+
+<form [formGroup]="form">
+  <div>
+    <label>Email</label>
+    <input type="text" formControlName="email" required>
+    <field-errors [for]="'email'" [errors]="errorsByField"></field-errors>
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="password" formControlName="password" required>
+    <field-errors [for]="'password'" [errors]="errorsByField"></field-errors>
+  </div>
+
+  <button (click)="login()" [disabled]="!canSaveForm">Login</button>
+</form>
