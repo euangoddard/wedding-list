@@ -2,11 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AngularFireModule } from 'angularfire2';
+import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { LoginComponent } from './login/login.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
+import { AdminFormComponent } from './admin-list/admin-form.component';
+import { AdminConfirmComponent } from "./admin-list/admin-confirm.component";
 import { ROUTING } from './app.routes';
 import { AuthGuard } from "./auth.guard.service";
 import { FieldErrorsComponent } from "./shared/forms";
@@ -29,14 +32,18 @@ export const firebaseConfig = {
     ListComponent,
     LoginComponent,
     AdminListComponent,
+    AdminFormComponent,
+    AdminConfirmComponent,
     FieldErrorsComponent,
     IdentifyComponent,
     ClaimPipe,
   ],
+  entryComponents: [AdminFormComponent, AdminConfirmComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    MaterialModule.forRoot(),
     ROUTING,
     IdentityModule,
   ],

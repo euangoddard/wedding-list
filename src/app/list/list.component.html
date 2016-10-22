@@ -2,20 +2,21 @@
 
 <p>When you claim a gift, it will be recorded as coming from <em>{{ claimer.name }} ({{ claimer.email }})</em></p>
 
-<section *ngFor="let section of giftSections | async">
-  <h3>{{ section.name }}</h3>
-  <ol>
-    <li *ngFor="let gift of section.gifts">
-      {{ gift.name }}
-      <button
-        *ngIf="!gift.claimer"
-        type="button"
-        (click)="claimGift(gift)"
-      >I will get this</button>
-      <em *ngIf="gift.claimer">
+<md-card *ngFor="let section of giftSections | async">
+	<h3>{{ section.name }}</h3>
+	<div class="gift-section-content" *ngFor="let gift of section.gifts">
+		<article class="gift-detail">
+			<h4>{{ gift.name }}</h4>
+			<p *ngIf="gift.description">{{ gift.description }}</p>
+			<a *ngIf="gift.link" md-raised-button [href]="gift.link" target="_blank">View link</a>
+		</article>
+		<aside>
+			<button *ngIf="!gift.claimer" md-raised-button color="accent" type="button" (click)="claimGift(gift)">I will get this</button>
+			<em *ngIf="gift.claimer">
         This gift has been claimed
         <span *ngIf="gift | isClaimedByCurrentUser">by you</span>
       </em>
-    </li>
-  </ol>
-</section>
+		</aside>
+	</div>
+
+</md-card>

@@ -24,8 +24,11 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.claimer = this.identity.identity;
-    //this.firebase.database.list('/giftSections').push({name: 'Towels', section: 'Bathroom', claimedBy: null});
-    this.gifts = this.firebase.database.list('/gifts');
+    this.gifts = this.firebase.database.list('/gifts', {
+      query: {
+        orderByChild: 'name',
+      }
+    });
     this.giftSections = this.gifts.map((gifts: Gift[]) => {
       const sectionsWithGifts = [];
       const giftsGroupedBySection = groupBy(gifts, 'section');

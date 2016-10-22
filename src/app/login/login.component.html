@@ -1,16 +1,17 @@
 <h2>Please sign-in to view the wedding list</h2>
 
-<form [formGroup]="form">
-  <div>
-    <label>Email</label>
-    <input type="text" formControlName="email" required>
-    <field-errors [for]="'email'" [errors]="errorsByField"></field-errors>
-  </div>
-  <div>
-    <label>Password</label>
-    <input type="password" formControlName="password" required>
-    <field-errors [for]="'password'" [errors]="errorsByField"></field-errors>
-  </div>
-
-  <button (click)="login()" [disabled]="!canSaveForm">Login</button>
-</form>
+<md-card>
+  <form [formGroup]="form" class="form-inline" (submit)="login()">
+    <div class="fieldset-inline">
+      <div class="field-inline">
+        <md-input type="text" formControlName="email" required placeholder="Email address"></md-input>
+        <field-errors [for]="'email'" [errors]="errorsByField"></field-errors>
+      </div>
+      <div class="field-inline">
+        <md-input type="password" formControlName="password" required placeholder="Password"></md-input>
+        <field-errors [for]="'password'" [errors]="errorsByField"></field-errors>
+      </div>
+    </div>
+    <button md-raised-button color="primary" [disabled]="!canSaveForm">Login</button>
+  </form>
+</md-card>

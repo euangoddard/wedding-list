@@ -4,6 +4,7 @@ export interface Gift {
   description?: string;
   link?: string;
   claimer?: GiftClaimer;
+  $key?: string;
 }
 
 
@@ -16,4 +17,10 @@ export interface GiftClaimer {
 export interface GiftSection {
   name: string;
   gifts: Gift[];
+}
+
+
+export enum DialogCloseButton {
+  Ok,
+  Cancel,
 }

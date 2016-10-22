@@ -1,0 +1,21 @@
+<h3>{{ action }} gift</h3>
+<form [formGroup]="form" class="form-dialog" (submit)="save()">
+  <div>
+    <md-input type="text" formControlName="name" required placeholder="Name"></md-input>
+    <field-errors [for]="'name'" [errors]="errorsByField"></field-errors>
+  </div>
+  <div>
+    <md-input type="text" formControlName="description" placeholder="Description (optional)"></md-input>
+    <field-errors [for]="'description'" [errors]="errorsByField"></field-errors>
+  </div>
+  <div>
+    <md-input type="text" formControlName="link" placeholder="Link (optional)"></md-input>
+    <field-errors [for]="'link'" [errors]="errorsByField"></field-errors>
+  </div>
+  <div>
+    <md-input type="text" formControlName="section" placeholder="Section"></md-input>
+    <field-errors [for]="'section'" [errors]="errorsByField"></field-errors>
+  </div>
+  <button type="button" md-raised-button (click)="cancel()">Cancel</button>
+  <button type="submit" md-raised-button color="primary" [disabled]="!canSaveForm">Save</button>
+</form>

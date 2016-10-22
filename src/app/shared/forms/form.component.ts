@@ -20,19 +20,19 @@ export abstract class FormComponent {
   protected onValueChanged(data?: any) {
     this.errorsByField = {};
     if (data) {
-      this.formData = this.filterFormDataForDirtyFields(this.form.controls, data);
+      this.formData = this.filterFormDataForFields(this.form.controls, data);
     }
     this.populateErrorMessage(this.form.controls, this.errorsByField);
   }
 
-  protected filterFormDataForDirtyFields(controls, formData) { // TODO: Add correct typings here
+  protected filterFormDataForFields(controls, formData) { // TODO: Add correct typings here
     let formDataFiltered = {};
     for (const controlName in controls) {
       let control: AbstractControl = controls[controlName];
-      if (control && control.dirty) {
+      if (control) {
         let controlDirtyData;
         if (control instanceof FormGroup) {
-          controlDirtyData = this.filterFormDataForDirtyFields(
+          controlDirtyData = this.filterFormDataForFields(
             control.controls,
             formData[controlName],
           );

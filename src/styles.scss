@@ -1,0 +1,97 @@
+@import "node_modules/normalize-scss/sass/normalize";
+@import "~@angular/material/core/theming/all-theme";
+
+@include normalize();
+@include md-core();
+
+$primary: md-palette($md-green);
+$accent:  md-palette($md-amber, A200, A100, A400);
+
+$theme: md-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
+
+
+body {
+  margin: 0;
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: $md-font-family;
+  font-size: $md-body-font-size-base;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.app-content {
+  padding: 1rem;
+
+  md-card {
+    margin-bottom: 1rem;
+  }
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.gift-section-content {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(black, 0.13);
+  margin-bottom: 1rem;
+
+  em {
+    line-height: 36px;
+    color: rgba(black, 0.55);
+  }
+}
+
+.colour-ligher {
+  color: rgba(black, 0.55);
+}
+
+
+.form-inline {
+
+  md-input {
+    width: 200px;
+  }
+
+  .fieldset-inline {
+    display: flex;
+
+    @media($md-xsmall) {
+      flex-direction: column;
+    }
+  }
+
+  .field-inline {
+    min-height: 5rem;
+    margin-right: 2rem;
+  }
+
+  field-errors {
+    display: block;
+    font-size: 0.75rem;
+  }
+}
+
+.form-dialog {
+  width: 300px;
+
+  md-input {
+    width: 100%;
+  }
+
+  button {
+    margin-top: 1rem;
+  }
+}

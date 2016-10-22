@@ -1,16 +1,17 @@
 <h2>Please let us know a bit about you</h2>
 
-<form [formGroup]="form">
-  <div>
-    <label>Your name</label>
-    <input type="text" formControlName="name" required>
-    <field-errors [for]="'name'" [errors]="errorsByField"></field-errors>
-  </div>
-  <div>
-    <label>Your email</label>
-    <input type="email" formControlName="email" required>
-    <field-errors [for]="'email'" [errors]="errorsByField"></field-errors>
-  </div>
-
-  <button (click)="identify()" [disabled]="!canSaveForm">Let's go!</button>
-</form>
+<md-card>
+  <form [formGroup]="form" class="form-inline" (submit)="identify()">
+    <div class="fieldset-inline">
+      <div class="field-inline">
+        <md-input type="text" formControlName="name" required placeholder="Your name"></md-input>
+        <field-errors [for]="'name'" [errors]="errorsByField"></field-errors>
+      </div>
+      <div class="field-inline">
+        <md-input type="text" formControlName="email" required placeholder="Your email"></md-input>
+        <field-errors [for]="'email'" [errors]="errorsByField"></field-errors>
+      </div>
+    </div>
+    <button md-raised-button color="primary" [disabled]="!canSaveForm">Let's go!</button>
+  </form>
+</md-card>

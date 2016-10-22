@@ -3,7 +3,7 @@ import { ValidationErrorInfo } from "./models";
 
 @Component({
   selector: 'field-errors',
-  template: '<span class="text-danger font-weight-medium" *ngFor="let message of errors">{{ message }}</span>',
+  template: '<span *ngFor="let message of errors">{{ message }}</span>',
 })
 export class FieldErrorsComponent {
 

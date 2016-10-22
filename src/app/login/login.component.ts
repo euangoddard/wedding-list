@@ -26,7 +26,8 @@ export class LoginComponent extends FormComponent implements OnInit {
     private firebase: AngularFire,
     private auth: FirebaseAuth,
     private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+  ) {
     super();
   }
 

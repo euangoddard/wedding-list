@@ -1,0 +1,7 @@
+<h3>Delete gift</h3>
+<p>Are you sure you want to delete <strong>{{ gift.name }}</strong>?</p>
+<p>This action cannot be undone!</p>
+<p>
+  <button type="button" md-raised-button (click)="cancel()">Cancel</button>
+  <button type="button" md-raised-button color="primary" (click)="deleteGift()">Delete</button>
+</p>
