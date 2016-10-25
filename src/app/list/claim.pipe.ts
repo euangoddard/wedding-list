@@ -11,7 +11,7 @@ export class ClaimPipe implements PipeTransform {
   }
 
   transform(gift: any): boolean {
-    return gift.claimer.email === this.identity.identity.email;
+    return gift.claimer && gift.claimer.email === this.identity.identity.email;
   }
 
 }

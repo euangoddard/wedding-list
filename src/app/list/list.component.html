@@ -1,22 +1,71 @@
 <h2>The wedding list</h2>
 
-<p>When you claim a gift, it will be recorded as coming from <em>{{ claimer.name }} ({{ claimer.email }})</em></p>
+<p>We're looking forward to building a home together - but we didn't want to
+  have everything coming from just one shop!</p>
+
+<p>If you want to bring a gift, we've put together a list of the most useful
+  things below, and you're free to get them from wherever you like. Where we
+  have a preference for a particular model/type/colour, we've added it beneath
+  the item, sometimes with a link to the website. Where there are no details, we
+  have no preference! Having something chosen by you will make it all the more
+  special.</p>
+
+<p>If you can source items sustainably – whether that's second-hand, recycled or
+  from a company that cares – we would encourage you to do so. We want our home
+  to reflect our beliefs (ok, Laura's beliefs) about sustainable
+  consumption.</p>
+
+<p>We also want to recognise that our marriage will extend beyond our home. If
+  you're not inspired by anything below, we will also be holding a collection on
+  the day for Community Table, our church's weekly outreach for the homeless of
+  Mitcham. Just £40 feeds 40 people and offers them the chance to be in a safe
+  and loving environment.</p>
+
+<p>Thank you!</p>
+
+<p>Sam & Laura</p>
+
+<h3>Sections</h3>
+
+<p>Just click 'I will get this' next to the item you would like to choose, and
+  then bring it along to the wedding (or we can provide a postal address if
+  that's easier). When you claim a gift, it will be recorded as coming from <em>{{ claimer.name }} ({{ claimer.email }})</em></p>
+<p>
+  <a
+    href="#{{section.name }}"
+    md-raised-button
+    color="accent"
+    *ngFor="let section of giftSections | async"
+  >{{ section.name }}</a>
+</p>
 
 <md-card *ngFor="let section of giftSections | async">
-	<h3>{{ section.name }}</h3>
-	<div class="gift-section-content" *ngFor="let gift of section.gifts">
-		<article class="gift-detail">
-			<h4>{{ gift.name }}</h4>
-			<p *ngIf="gift.description">{{ gift.description }}</p>
-			<a *ngIf="gift.link" md-raised-button [href]="gift.link" target="_blank">View link</a>
-		</article>
-		<aside>
-			<button *ngIf="!gift.claimer" md-raised-button color="accent" type="button" (click)="claimGift(gift)">I will get this</button>
-			<em *ngIf="gift.claimer">
-        This gift has been claimed
-        <span *ngIf="gift | isClaimedByCurrentUser">by you</span>
-      </em>
-		</aside>
-	</div>
+  <h3 [id]="section.name">{{ section.name }}</h3>
+  <div class="gift-section-content" *ngFor="let gift of section.gifts">
+    <article class="gift-detail">
+      <h4>{{ gift.name }}</h4>
+      <p *ngIf="gift.description">{{ gift.description }}</p>
+      <a *ngIf="gift.link" md-raised-button [href]="gift.link" target="_blank">See more detail</a>
+    </article>
+    <aside>
+      <button
+        *ngIf="!gift.claimer" md-raised-button color="accent"
+        type="button"
+        (click)="claimGift(gift)"
+      >
+        I will get this
+      </button>
+      <div *ngIf="gift | isClaimedByCurrentUser">
+        <em>You will get this</em>
+        <button
+          md-raised-button
+          color="primary"
+          type="button"
+          (click)="unclaimGift(gift)"
+        >Undo</button>
+      </div>
+      <em *ngIf="gift.claimer && !(gift | isClaimedByCurrentUser)">This gift has already been claimed</em>
+    </aside>
+  </div>
 
 </md-card>

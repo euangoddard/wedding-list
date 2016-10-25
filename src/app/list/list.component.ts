@@ -48,6 +48,10 @@ export class ListComponent implements OnInit {
     this.gifts.update(gift.$key, {claimer: this.identity.identity});
   }
 
+  unclaimGift(gift: any): void {
+    this.gifts.update(gift.$key, {claimer: null});
+  }
+
 }
 
 
