@@ -19,8 +19,13 @@ export class IdentityService {
     this.save(newIdentity);
   }
 
+  clearIdentity(): void {
+    localStorage.removeItem(IdentityService.KEY);
+    this.identityData = null;
+  }
+
   isIdentified(): boolean {
-    return hasObjectItems(this.identityData);
+    return this.identityData && hasObjectItems(this.identityData);
   }
 
   private load(): Identity {

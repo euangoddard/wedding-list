@@ -1,5 +1,9 @@
 <md-toolbar color="primary">
-  {{title}}
+  {{ title }}
+  <span class="fill-remaining-space"></span>
+  <button type="button" md-button *ngIf="isIdentified" (click)="unidentify()">
+    Sign-off
+  </button>
 </md-toolbar>
 <div class="app-content">
   <router-outlet></router-outlet>
