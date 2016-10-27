@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AngularFire, FirebaseListObservable } from "angularfire2";
 import { IdentityService } from "../shared/identity/identity.service";
-import { GiftClaimer, Gift, GiftSection } from "../shared/models";
-import { Observable } from "rxjs";
+import { GiftClaimer, Gift } from "../shared/models";
 
 @Component({
   selector: 'app-list',
@@ -11,11 +10,11 @@ import { Observable } from "rxjs";
 })
 export class ListComponent implements OnInit {
 
-  giftSections: Observable<GiftSection[]>;
-
   claimer: GiftClaimer;
 
-  private gifts: FirebaseListObservable<Gift[]>;
+  gifts: FirebaseListObservable<Gift[]>;
+
+  isUnclaimedFilteringActive = false;
 
   constructor(
     private firebase: AngularFire,
@@ -29,19 +28,6 @@ export class ListComponent implements OnInit {
         orderByChild: 'name',
       }
     });
-    this.giftSections = this.gifts.map((gifts: Gift[]) => {
-      const sectionsWithGifts = [];
-      const giftsGroupedBySection = groupBy(gifts, 'section');
-      let sectionGifts: GiftSection[];
-      for (let sectionName in giftsGroupedBySection) {
-        sectionGifts = giftsGroupedBySection[sectionName];
-        sectionsWithGifts.push({
-          name: sectionName,
-          gifts: sectionGifts
-        });
-      }
-      return sectionsWithGifts;
-    });
   }
 
   claimGift(gift: any): void {
@@ -52,12 +38,4 @@ export class ListComponent implements OnInit {
     this.gifts.update(gift.$key, {claimer: null});
   }
 
-}
-
-
-function groupBy (collection: Array<any>, key: string): {[key: string]: Array<any>} {
-  return collection.reduce(function(rv, x) {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
 }

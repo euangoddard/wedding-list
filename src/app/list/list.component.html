@@ -29,17 +29,26 @@
 
 <p>Just click 'I will get this' next to the item you would like to choose, and
   then bring it along to the wedding (or we can provide a postal address if
-  that's easier). When you claim a gift, it will be recorded as coming from <em>{{ claimer.name }} ({{ claimer.email }})</em></p>
+  that's easier). When you claim a gift, it will be recorded as coming from
+  <em>{{ claimer.name }} ({{ claimer.email }})</em>
+</p>
 <p>
   <a
     href="#{{section.name }}"
     md-raised-button
     color="accent"
-    *ngFor="let section of giftSections | async"
+    *ngFor="let section of gifts | claimFilter: isUnclaimedFilteringActive | groupBySection | async"
   >{{ section.name }}</a>
 </p>
 
-<md-card *ngFor="let section of giftSections | async">
+<h3>Filtering</h3>
+<p>
+  <md-slide-toggle [(ngModel)]="isUnclaimedFilteringActive">
+    Show only unclaimed gifts
+  </md-slide-toggle>
+</p>
+
+<md-card *ngFor="let section of gifts | claimFilter: isUnclaimedFilteringActive | groupBySection | async">
   <h3 [id]="section.name">{{ section.name }}</h3>
   <div class="gift-section-content" *ngFor="let gift of section.gifts">
     <article class="gift-detail">
