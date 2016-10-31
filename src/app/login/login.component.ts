@@ -22,12 +22,10 @@ import { validateEmail } from "../shared/forms/validators";
 })
 export class LoginComponent extends FormComponent implements OnInit {
 
-  constructor(
-    private firebase: AngularFire,
-    private auth: FirebaseAuth,
-    private router: Router,
-    private formBuilder: FormBuilder,
-  ) {
+  constructor(private firebase: AngularFire,
+              private auth: FirebaseAuth,
+              private router: Router,
+              private formBuilder: FormBuilder,) {
     super();
   }
 
@@ -40,30 +38,45 @@ export class LoginComponent extends FormComponent implements OnInit {
       });
 
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, validateEmail]],
+      isAdmin: [''],
       password: ['', [Validators.required]],
     });
     this.form.valueChanges.subscribe(data => this.onValueChanged(data));
   }
 
   login() {
-    this.firebase.auth.login(this.formData,
+    this.firebase.auth.login({
+        email: getEmailForUser(this.formData['isAdmin']),
+        password: this.formData['password'],
+      },
       {
         provider: AuthProviders.Password,
         method: AuthMethods.Password,
       }).then(() => {
-        this.router.navigate(['/identify']);
-      }, err => {
-        console.log(err);
-        this.populateErrorMessagesFromServer(
-          { password: [err.message] },
-          this.errorsByField,
-        );
-      });
+      this.router.navigate(['/identify']);
+    }, err => {
+      console.log(err);
+      this.populateErrorMessagesFromServer(
+        {password: [err.message]},
+        this.errorsByField,
+      );
+    });
   }
 
   logout() {
     this.firebase.auth.logout();
   }
 
+}
+
+
+function getEmailForUser(isAdmin: boolean): string {
+  console.log(isAdmin);
+  let email: string;
+  if (isAdmin) {
+    email = 'admin@wedding-list.org';
+  } else {
+    email = 'guest@wedding-list.org';
+  }
+  return email;
 }

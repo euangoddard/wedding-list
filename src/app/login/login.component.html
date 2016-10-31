@@ -4,14 +4,17 @@
   <form [formGroup]="form" class="form-inline" (submit)="login()">
     <div class="fieldset-inline">
       <div class="field-inline">
-        <md-input type="text" formControlName="email" required placeholder="Email address"></md-input>
-        <field-errors [for]="'email'" [errors]="errorsByField"></field-errors>
-      </div>
-      <div class="field-inline">
         <md-input type="password" formControlName="password" required placeholder="Password"></md-input>
         <field-errors [for]="'password'" [errors]="errorsByField"></field-errors>
       </div>
     </div>
     <button md-raised-button color="primary" [disabled]="!canSaveForm">Login</button>
+    
+    <div>
+      <md-slide-toggle formControlName="isAdmin">
+        I'm an admin
+      </md-slide-toggle>
+    </div>
+      
   </form>
 </md-card>
