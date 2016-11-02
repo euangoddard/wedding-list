@@ -10,7 +10,7 @@ import { AdminListComponent } from "./admin-list/admin-list.component";
 import { AdminFormComponent } from "./admin-list/admin-form.component";
 import { AdminConfirmComponent } from "./admin-list/admin-confirm.component";
 import { ROUTING } from "./app.routes";
-import { AuthGuard } from "./auth.guard.service";
+import { AuthModule } from "./shared/auth/auth.module";
 import { FieldErrorsComponent } from "./shared/forms";
 import { IdentifyComponent } from "./identify/identify.component";
 import { IdentityModule } from "./shared/identity/identity.module";
@@ -50,9 +50,7 @@ export const firebaseConfig = {
     MaterialModule.forRoot(),
     ROUTING,
     IdentityModule,
-  ],
-  providers: [
-    AuthGuard,
+    AuthModule,
   ],
   bootstrap: [AppComponent]
 })

@@ -7,7 +7,7 @@ import { AdminListComponent } from "./admin-list/admin-list.component";
 import { IdentifyComponent } from "./identify/identify.component";
 
 import { IdentifyGuard } from "./shared/identity/identify.guard";
-import { AuthGuard } from "./auth.guard.service";
+import { AuthGuard } from "./shared/auth/auth.guard.service";
 
 
 const ROUTES: Routes = [
