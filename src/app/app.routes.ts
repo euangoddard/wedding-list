@@ -8,13 +8,14 @@ import { IdentifyComponent } from "./identify/identify.component";
 
 import { IdentifyGuard } from "./shared/identity/identify.guard";
 import { AuthGuard } from "./shared/auth/auth.guard.service";
+import { AdminGuard } from "./shared/auth/admin.guard.service";
 
 
 const ROUTES: Routes = [
   {path: '', component: ListComponent, canActivate: [AuthGuard, IdentifyGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'identify', component: IdentifyComponent, canActivate: [AuthGuard]},
-  {path: 'admin', component: AdminListComponent, canActivate: [AuthGuard, IdentifyGuard]},
+  {path: 'admin', component: AdminListComponent, canActivate: [AuthGuard, AdminGuard]},
 ];
 
 export const ROUTING: ModuleWithProviders = RouterModule.forRoot(ROUTES);
