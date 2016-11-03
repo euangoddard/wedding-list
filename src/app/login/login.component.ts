@@ -57,7 +57,6 @@ export class LoginComponent extends FormComponent implements OnInit {
       }).then(() => {
       this.router.navigate(['/identify']);
     }, err => {
-      console.log(err);
       this.populateErrorMessagesFromServer(
         {password: [err.message]},
         this.errorsByField,
