@@ -1,7 +1,7 @@
 <md-toolbar color="primary">
   {{ title }}
   <span class="fill-remaining-space"></span>
-  <button type="button" md-button *ngIf="isIdentified" (click)="unidentify()">
+  <button type="button" md-button *ngIf="isSignedIn | async" (click)="signOut()">
     Sign-off
   </button>
 </md-toolbar>
