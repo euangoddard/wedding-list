@@ -22,10 +22,12 @@ import { validateEmail } from "../shared/forms/validators";
 })
 export class LoginComponent extends FormComponent implements OnInit {
 
-  constructor(private firebase: AngularFire,
-              private auth: FirebaseAuth,
-              private router: Router,
-              private formBuilder: FormBuilder,) {
+  constructor(
+    private firebase: AngularFire,
+    private auth: FirebaseAuth,
+    private router: Router,
+    private formBuilder: FormBuilder,
+  ) {
     super();
   }
 
@@ -71,7 +73,6 @@ export class LoginComponent extends FormComponent implements OnInit {
 
 
 function getEmailForUser(isAdmin: boolean): string {
-  console.log(isAdmin);
   let email: string;
   if (isAdmin) {
     email = 'admin@wedding-list.org';
