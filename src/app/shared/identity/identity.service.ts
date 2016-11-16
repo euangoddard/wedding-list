@@ -5,7 +5,7 @@ export class IdentityService {
 
   private static KEY = 'identity';
 
-  private identityData: Identity
+  private identityData: Identity;
 
   constructor() {
     this.identityData = this.load();
@@ -42,7 +42,7 @@ export class IdentityService {
 }
 
 
-interface Identity {
+export interface Identity {
   name: string;
   email: string;
 }

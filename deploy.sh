@@ -1,2 +1,2 @@
 #!/bin/bash
-rm -r dist && ng build --prod && firebase deploy
+rm -r dist && ng build --aot --prod && firebase deploy
